@@ -11,6 +11,7 @@
 
 @interface ECNoteManager : NSObject
 
-- (void)saveNote:(ECNote *)note;
++ (void)saveNote:(ECNote *)note;
++ (ECNote *)loadNote;
 
 @end

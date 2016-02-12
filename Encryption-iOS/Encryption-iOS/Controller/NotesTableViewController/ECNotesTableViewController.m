@@ -8,10 +8,13 @@
 
 #import "ECNotesTableViewController.h"
 #import "ECNote.h"
+#import "ECNoteManager.h"
 
 NSString *const kreuseIdentifier = @"noteCell";
 
 @interface ECNotesTableViewController ()
+
+@property (strong, nonatomic) NSArray *notes;
 
 @end
 
@@ -19,7 +22,17 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    ECNote *note = [ECNote new];
+    ECNote *note2 = [ECNote new];
+    ECNote *note3 = [ECNote new];
+    ECNote *note4 = [ECNote new];
+
+    note.noteText = @"LALALA";
+    note2.noteText = @"333";
+    note3.noteText = @"LAL333ALA";
+    note4.noteText = @"LALALA54545";
+    self.notes = @[note, note2, note3, note4];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,21 +40,24 @@ NSString *const kreuseIdentifier = @"noteCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.notes count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kreuseIdentifier forIndexPath:indexPath];
-    
-    
+    ECNote *currentNote = self.notes[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", currentNote.creationDate];
     return cell;
 }
 
@@ -80,14 +96,12 @@ NSString *const kreuseIdentifier = @"noteCell";
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
 }
-*/
+
 
 @end

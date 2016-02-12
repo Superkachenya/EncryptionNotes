@@ -11,9 +11,25 @@
 
 @implementation ECNoteManager
 
-- (void)saveNote:(ECNote *)note {
-    NSURL *documentsDirectoryPaths = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                                            inDomains:NSUserDomainMask] lastObject];
++ (NSURL *)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
 }
 
++ (void)saveNote:(ECNote *)note {
+    NSString *path = [[self applicationDocumentsDirectory].path
+                      stringByAppendingPathComponent:@"note"];
+    [NSKeyedArchiver archiveRootObject:note toFile:path];
+}
+
++ (ECNote *)loadNote {
+    ECNote *loadedNote = nil;
+    NSString *filePath = [[self applicationDocumentsDirectory].path
+                          stringByAppendingPathComponent:@"note"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        loadedNote = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return loadedNote;
+}
 @end

@@ -21,10 +21,10 @@ NSString *const kNoteText = @"noteText";
 @implementation ECNote
 
 - (NSDate *)creationDate {
-    if (!self.creationDate) {
+    if (!_creationDate) {
         self.creationDate = [NSDate date];
     }
-    return self.creationDate;
+    return _creationDate;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {

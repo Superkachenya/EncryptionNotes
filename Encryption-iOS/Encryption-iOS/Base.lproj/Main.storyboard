@@ -72,7 +72,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="576.5" y="855.5"/>
+            <point key="canvasLocation" x="-79.5" y="867.5"/>
         </scene>
         <!--Notes-->
         <scene sceneID="Bqx-8V-XWh">
@@ -126,7 +126,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6OH-cc-6JB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1433.5" y="855.5"/>
+            <point key="canvasLocation" x="785.5" y="873.5"/>
         </scene>
         <!--Note-->
         <scene sceneID="RBz-Xt-zvD">
@@ -163,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31J-am-gWu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1870.5" y="855.5"/>
+            <point key="canvasLocation" x="1214.5" y="867.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="i8H-Zg-6h8">
@@ -188,7 +188,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emU-zE-svz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="152" y="856"/>
+            <point key="canvasLocation" x="-504.5" y="867.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="orR-c8-tTE">
@@ -212,7 +212,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLj-Qz-i3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1008.5" y="855.5"/>
+            <point key="canvasLocation" x="352.5" y="867.5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
