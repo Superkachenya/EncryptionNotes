@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ECNote;
 
 @interface ECNoteViewController : UIViewController
+
+@property (strong, nonatomic) ECNote *currentNote;
 
 @end

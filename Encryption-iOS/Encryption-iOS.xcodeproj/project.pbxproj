@@ -18,6 +18,7 @@
 		8EBE93111C6DFD66000957B4 /* ECNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE93101C6DFD66000957B4 /* ECNote.m */; };
 		8EBE93171C6DFE72000957B4 /* ECNotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE93161C6DFE72000957B4 /* ECNotesTableViewController.m */; };
 		8EBE931B1C6E02F0000957B4 /* ECNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE931A1C6E02F0000957B4 /* ECNoteViewController.m */; };
+		8EBE931F1C6E10CD000957B4 /* ECNoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE931E1C6E10CD000957B4 /* ECNoteManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		8EBE93161C6DFE72000957B4 /* ECNotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECNotesTableViewController.m; path = Controller/NotesTableViewController/ECNotesTableViewController.m; sourceTree = "<group>"; };
 		8EBE93191C6E02F0000957B4 /* ECNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECNoteViewController.h; path = Controller/NoteViewController/ECNoteViewController.h; sourceTree = "<group>"; };
 		8EBE931A1C6E02F0000957B4 /* ECNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECNoteViewController.m; path = Controller/NoteViewController/ECNoteViewController.m; sourceTree = "<group>"; };
+		8EBE931D1C6E10CD000957B4 /* ECNoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECNoteManager.h; path = NoteManager/ECNoteManager.h; sourceTree = "<group>"; };
+		8EBE931E1C6E10CD000957B4 /* ECNoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECNoteManager.m; path = NoteManager/ECNoteManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 			children = (
 				8EBE92DE1C6DE985000957B4 /* AppDelegate.h */,
 				8EBE92DF1C6DE985000957B4 /* AppDelegate.m */,
+				8EBE93201C6E10D1000957B4 /* NoteManager */,
 				8EBE93121C6DFD69000957B4 /* Model */,
 				8EBE93141C6DFE35000957B4 /* Controller */,
 				8EBE92E41C6DE985000957B4 /* Main.storyboard */,
@@ -201,6 +205,15 @@
 				8EBE931A1C6E02F0000957B4 /* ECNoteViewController.m */,
 			);
 			name = NoteViewController;
+			sourceTree = "<group>";
+		};
+		8EBE93201C6E10D1000957B4 /* NoteManager */ = {
+			isa = PBXGroup;
+			children = (
+				8EBE931D1C6E10CD000957B4 /* ECNoteManager.h */,
+				8EBE931E1C6E10CD000957B4 /* ECNoteManager.m */,
+			);
+			name = NoteManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EBE92E31C6DE985000957B4 /* ECLogInViewController.m in Sources */,
+				8EBE931F1C6E10CD000957B4 /* ECNoteManager.m in Sources */,
 				8EBE93111C6DFD66000957B4 /* ECNote.m in Sources */,
 				8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */,
 				8EBE93171C6DFE72000957B4 /* ECNotesTableViewController.m in Sources */,

@@ -8,6 +8,10 @@
 
 #import "ECNote.h"
 
+NSString *const kCreationDate = @"creationDate";
+NSString *const kNoteText = @"noteText";
+
+
 @interface ECNote ()
 
 @property (strong, nonatomic, readwrite) NSDate *creationDate;
@@ -16,12 +20,23 @@
 
 @implementation ECNote
 
-- (instancetype)init {
+- (NSDate *)creationDate {
+    if (!self.creationDate) {
+        self.creationDate = [NSDate date];
+    }
+    return self.creationDate;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.creationDate forKey:kCreationDate];
+    [coder encodeObject:self.noteText forKey:kNoteText];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        NSDate *currentDate = [NSDate date];
-        self.creationDate = currentDate;
+        self.creationDate = [decoder decodeObjectForKey:kCreationDate];
+        self.noteText = [decoder decodeObjectForKey:kNoteText];
     }
     return self;
 }
-
 @end
