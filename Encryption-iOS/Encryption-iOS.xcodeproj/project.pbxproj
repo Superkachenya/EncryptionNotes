@@ -15,6 +15,7 @@
 		8EBE92EB1C6DE985000957B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EBE92E91C6DE985000957B4 /* LaunchScreen.storyboard */; };
 		8EBE92F61C6DE986000957B4 /* Encryption_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92F51C6DE986000957B4 /* Encryption_iOSTests.m */; };
 		8EBE93011C6DE986000957B4 /* Encryption_iOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE93001C6DE986000957B4 /* Encryption_iOSUITests.m */; };
+		8EBE93111C6DFD66000957B4 /* ECNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE93101C6DFD66000957B4 /* ECNote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		8EBE92FC1C6DE986000957B4 /* Encryption-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Encryption-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBE93001C6DE986000957B4 /* Encryption_iOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Encryption_iOSUITests.m; sourceTree = "<group>"; };
 		8EBE93021C6DE986000957B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EBE930F1C6DFD65000957B4 /* ECNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECNote.h; path = Model/Note/ECNote.h; sourceTree = "<group>"; };
+		8EBE93101C6DFD66000957B4 /* ECNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECNote.m; path = Model/Note/ECNote.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,7 @@
 			children = (
 				8EBE92DE1C6DE985000957B4 /* AppDelegate.h */,
 				8EBE92DF1C6DE985000957B4 /* AppDelegate.m */,
+				8EBE93121C6DFD69000957B4 /* Model */,
 				8EBE930E1C6DF4A1000957B4 /* LogInViewController */,
 				8EBE92E41C6DE985000957B4 /* Main.storyboard */,
 				8EBE92E71C6DE985000957B4 /* Assets.xcassets */,
@@ -146,6 +150,23 @@
 				8EBE92E21C6DE985000957B4 /* ECLogInViewController.m */,
 			);
 			name = LogInViewController;
+			sourceTree = "<group>";
+		};
+		8EBE93121C6DFD69000957B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EBE93131C6DFD76000957B4 /* Note */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8EBE93131C6DFD76000957B4 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				8EBE930F1C6DFD65000957B4 /* ECNote.h */,
+				8EBE93101C6DFD66000957B4 /* ECNote.m */,
+			);
+			name = Note;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EBE92E31C6DE985000957B4 /* ECLogInViewController.m in Sources */,
+				8EBE93111C6DFD66000957B4 /* ECNote.m in Sources */,
 				8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */,
 				8EBE92DD1C6DE985000957B4 /* main.m in Sources */,
 			);
