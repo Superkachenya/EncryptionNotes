@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8EBE92DD1C6DE985000957B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92DC1C6DE985000957B4 /* main.m */; };
 		8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92DF1C6DE985000957B4 /* AppDelegate.m */; };
-		8EBE92E31C6DE985000957B4 /* ECPaswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92E21C6DE985000957B4 /* ECPaswordViewController.m */; };
+		8EBE92E31C6DE985000957B4 /* ECLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92E21C6DE985000957B4 /* ECLogInViewController.m */; };
 		8EBE92E61C6DE985000957B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EBE92E41C6DE985000957B4 /* Main.storyboard */; };
 		8EBE92E81C6DE985000957B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EBE92E71C6DE985000957B4 /* Assets.xcassets */; };
 		8EBE92EB1C6DE985000957B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EBE92E91C6DE985000957B4 /* LaunchScreen.storyboard */; };
@@ -39,8 +39,8 @@
 		8EBE92DC1C6DE985000957B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8EBE92DE1C6DE985000957B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8EBE92DF1C6DE985000957B4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8EBE92E11C6DE985000957B4 /* ECPaswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECPaswordViewController.h; sourceTree = "<group>"; };
-		8EBE92E21C6DE985000957B4 /* ECPaswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECPaswordViewController.m; sourceTree = "<group>"; };
+		8EBE92E11C6DE985000957B4 /* ECLogInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECLogInViewController.h; sourceTree = "<group>"; };
+		8EBE92E21C6DE985000957B4 /* ECLogInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECLogInViewController.m; sourceTree = "<group>"; };
 		8EBE92E51C6DE985000957B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8EBE92E71C6DE985000957B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EBE92EA1C6DE985000957B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,8 +103,7 @@
 			children = (
 				8EBE92DE1C6DE985000957B4 /* AppDelegate.h */,
 				8EBE92DF1C6DE985000957B4 /* AppDelegate.m */,
-				8EBE92E11C6DE985000957B4 /* ECPaswordViewController.h */,
-				8EBE92E21C6DE985000957B4 /* ECPaswordViewController.m */,
+				8EBE930E1C6DF4A1000957B4 /* LogInViewController */,
 				8EBE92E41C6DE985000957B4 /* Main.storyboard */,
 				8EBE92E71C6DE985000957B4 /* Assets.xcassets */,
 				8EBE92E91C6DE985000957B4 /* LaunchScreen.storyboard */,
@@ -138,6 +137,15 @@
 				8EBE93021C6DE986000957B4 /* Info.plist */,
 			);
 			path = "Encryption-iOSUITests";
+			sourceTree = "<group>";
+		};
+		8EBE930E1C6DF4A1000957B4 /* LogInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EBE92E11C6DE985000957B4 /* ECLogInViewController.h */,
+				8EBE92E21C6DE985000957B4 /* ECLogInViewController.m */,
+			);
+			name = LogInViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EBE92E31C6DE985000957B4 /* ECPaswordViewController.m in Sources */,
+				8EBE92E31C6DE985000957B4 /* ECLogInViewController.m in Sources */,
 				8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */,
 				8EBE92DD1C6DE985000957B4 /* main.m in Sources */,
 			);

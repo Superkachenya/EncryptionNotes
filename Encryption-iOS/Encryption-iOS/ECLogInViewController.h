@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECPaswordViewController : UIViewController
+@interface ECLogInViewController : UIViewController
 
 
 @end

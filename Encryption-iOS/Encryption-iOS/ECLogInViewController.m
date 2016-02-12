@@ -6,16 +6,16 @@
 //  Copyright © 2016 Cleveroad. All rights reserved.
 //
 
-#import "ECPaswordViewController.h"
+#import "ECLogInViewController.h"
 
-@interface ECPaswordViewController ()
+@interface ECLogInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (assign, nonatomic) CGFloat centerYConstantValue;
 
 @end
 
-@implementation ECPaswordViewController
+@implementation ECLogInViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
