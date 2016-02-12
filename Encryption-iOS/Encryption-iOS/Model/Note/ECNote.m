@@ -8,6 +8,20 @@
 
 #import "ECNote.h"
 
+@interface ECNote ()
+
+@property (strong, nonatomic, readwrite) NSDate *creationDate;
+
+@end
+
 @implementation ECNote
+
+- (instancetype)init {
+    if (self = [super init]) {
+        NSDate *currentDate = [NSDate date];
+        self.creationDate = currentDate;
+    }
+    return self;
+}
 
 @end
