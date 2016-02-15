@@ -24,7 +24,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     [super viewDidLoad];
     ECNoteManager *manager = [ECNoteManager sharedInstance];
     self.notes = [NSMutableArray new];
-    self.notes = [manager loadedNotes];
+    [self.notes addObject: [manager loadNote]];
     
 }
 

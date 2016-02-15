@@ -37,7 +37,8 @@
 
 - (ECNote *)loadNote {
     ECNote *loadedNote = nil;
-    NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingString:@".txt"];
+    NSString *filePath = [[self applicationDocumentsDirectory].path
+                          stringByAppendingPathComponent:@".txt"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         loadedNote = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -45,13 +46,5 @@
     return loadedNote;
 }
 
--(NSMutableArray *)loadedNotes {
-    NSString *filePath = [self applicationDocumentsDirectory].path;
-    NSError *error = nil;
-    NSMutableArray *array = [NSMutableArray arrayWithArray: [[NSFileManager defaultManager]
-                                                             contentsOfDirectoryAtPath:filePath error:&error]];
-    NSLog(@"%@", array);
-    return array;
-}
 
 @end

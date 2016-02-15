@@ -14,7 +14,5 @@
 + (instancetype)sharedInstance;
 - (void)saveNote:(ECNote *)note;
 - (ECNote *)loadNote;
--(NSMutableArray *)loadedNotes;
-
 
 @end
