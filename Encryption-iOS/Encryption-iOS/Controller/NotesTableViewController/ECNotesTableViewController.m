@@ -22,16 +22,9 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ECNote *note = [ECNote new];
-    ECNote *note2 = [ECNote new];
-    ECNote *note3 = [ECNote new];
-    ECNote *note4 = [ECNote new];
-    
-    note.noteText = @"LALALA";
-    note2.noteText = @"333";
-    note3.noteText = @"LAL333ALA";
-    note4.noteText = @"LALALA54545";
-    self.notes = [NSMutableArray arrayWithObjects:note, note2, note3, note4, nil];
+    ECNoteManager *manager = [ECNoteManager sharedInstance];
+    self.notes = [NSMutableArray new];
+    self.notes = [manager loadedNotes];
     
 }
 
@@ -54,15 +47,23 @@ NSString *const kreuseIdentifier = @"noteCell";
     return [self.notes count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kreuseIdentifier forIndexPath:indexPath];
     ECNote *currentNote = self.notes[indexPath.row];
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MM/dd/YYYY hh:mm:ss";
+    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
     NSString *dateString = [formatter stringFromDate:currentNote.creationDate];
     cell.textLabel.text = dateString;
     return cell;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.notes removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 - (IBAction)selectEditingMode:(id)sender {
@@ -78,13 +79,6 @@ NSString *const kreuseIdentifier = @"noteCell";
         [self.tableView reloadData];
         [self.navigationItem.leftBarButtonItem setTitle:@"Done"];
         [self.navigationItem.leftBarButtonItem setStyle:UIBarButtonItemStyleDone];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.notes removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 

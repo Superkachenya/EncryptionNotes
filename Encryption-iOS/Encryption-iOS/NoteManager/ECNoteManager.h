@@ -11,7 +11,10 @@
 
 @interface ECNoteManager : NSObject
 
++ (instancetype)sharedInstance;
 - (void)saveNote:(ECNote *)note;
-- (void)loadNote;
+- (ECNote *)loadNote;
+-(NSMutableArray *)loadedNotes;
+
 
 @end

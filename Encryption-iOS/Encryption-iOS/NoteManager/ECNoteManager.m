@@ -26,18 +26,32 @@
 }
 
 - (void)saveNote:(ECNote *)note {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"HH:mm:ss";
+    NSString *notePath = [NSString stringWithFormat:@"%@.txt", [formatter stringFromDate:note.creationDate]];
     NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:@".txt"];
+                      stringByAppendingPathComponent:notePath];
     [NSKeyedArchiver archiveRootObject:note toFile:path];
+    NSLog(@"%@",path);
 }
 
-- (void)loadNote {
+- (ECNote *)loadNote {
     ECNote *loadedNote = nil;
-    NSString *filePath = [[self applicationDocumentsDirectory].path
-                          stringByAppendingPathComponent:@"note"];
+    NSString *filePath = [[self applicationDocumentsDirectory].path stringByAppendingString:@".txt"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         loadedNote = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
+    return loadedNote;
 }
+
+-(NSMutableArray *)loadedNotes {
+    NSString *filePath = [self applicationDocumentsDirectory].path;
+    NSError *error = nil;
+    NSMutableArray *array = [NSMutableArray arrayWithArray: [[NSFileManager defaultManager]
+                                                             contentsOfDirectoryAtPath:filePath error:&error]];
+    NSLog(@"%@", array);
+    return array;
+}
+
 @end
