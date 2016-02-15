@@ -112,8 +112,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Notes" id="4kP-Kx-tWc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="5dN-c8-Cfg"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Xoa-po-89X">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="Xoa-po-89X">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="selectEditingMode:" destination="xHo-gr-omP" id="B7w-ZK-WfH"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="r1T-2x-fKS">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
