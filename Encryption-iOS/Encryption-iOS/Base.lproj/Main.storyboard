@@ -111,6 +111,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Notes" id="4kP-Kx-tWc">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="5dN-c8-Cfg"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Xoa-po-89X">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -216,6 +217,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zCq-Fv-EMR"/>
+        <segue reference="j7m-as-CFf"/>
     </inferredMetricsTieBreakers>
 </document>
