@@ -11,18 +11,27 @@
 
 @implementation ECNoteManager
 
-+ (NSURL *)applicationDocumentsDirectory {
++ (instancetype)sharedInstance {
+    static ECNoteManager *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [ECNoteManager new];
+    });
+    return sharedInstance;
+}
+
+- (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
-+ (void)saveNote:(ECNote *)note {
+- (void)saveNote:(ECNote *)note {
     NSString *path = [[self applicationDocumentsDirectory].path
                       stringByAppendingPathComponent:@".txt"];
     [NSKeyedArchiver archiveRootObject:note toFile:path];
 }
 
-+ (ECNote *)loadNote {
+- (void)loadNote {
     ECNote *loadedNote = nil;
     NSString *filePath = [[self applicationDocumentsDirectory].path
                           stringByAppendingPathComponent:@"note"];
@@ -30,6 +39,5 @@
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         loadedNote = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    return loadedNote;
 }
 @end

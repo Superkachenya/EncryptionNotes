@@ -59,7 +59,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kreuseIdentifier forIndexPath:indexPath];
     ECNote *currentNote = self.notes[indexPath.row];
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"MM/dd/YYYY hh:mm:ss"];
+    formatter.dateFormat = @"MM/dd/YYYY hh:mm:ss";
     NSString *dateString = [formatter stringFromDate:currentNote.creationDate];
     cell.textLabel.text = dateString;
     return cell;
