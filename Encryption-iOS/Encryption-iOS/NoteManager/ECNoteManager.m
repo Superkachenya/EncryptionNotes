@@ -18,7 +18,7 @@
 
 + (void)saveNote:(ECNote *)note {
     NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:@"note"];
+                      stringByAppendingPathComponent:@".txt"];
     [NSKeyedArchiver archiveRootObject:note toFile:path];
 }
 

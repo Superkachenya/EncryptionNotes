@@ -7,6 +7,7 @@
 //
 
 #import "ECNoteViewController.h"
+#import "ECNote.h"
 
 @interface ECNoteViewController ()
 
@@ -18,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.noteText.text = self.currentNote.noteText;
 }
 
 - (void)didReceiveMemoryWarning {

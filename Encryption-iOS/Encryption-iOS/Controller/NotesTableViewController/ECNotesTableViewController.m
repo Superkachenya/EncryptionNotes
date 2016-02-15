@@ -9,6 +9,7 @@
 #import "ECNotesTableViewController.h"
 #import "ECNote.h"
 #import "ECNoteManager.h"
+#import "ECNoteViewController.h"
 
 NSString *const kreuseIdentifier = @"noteCell";
 
@@ -100,7 +101,15 @@ NSString *const kreuseIdentifier = @"noteCell";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    if ([segue.identifier isEqualToString:@"addNote"]) {
+        ECNoteViewController *detailsController = [segue destinationViewController];
+        detailsController.currentNote = [ECNote new];
+    }
+    if ([segue.identifier isEqualToString:@"noteDetails"]) {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        ECNoteViewController *detailsController = [segue destinationViewController];
+        detailsController.currentNote = self.notes[indexPath.row];
+    }
 }
 
 
