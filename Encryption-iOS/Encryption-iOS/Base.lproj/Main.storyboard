@@ -22,7 +22,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="alU-dT-mk1"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -150,13 +150,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="9IU-Px-PeZ" secondAttribute="bottom" id="B7i-Zc-22a"/>
-                            <constraint firstAttribute="trailing" secondItem="9IU-Px-PeZ" secondAttribute="trailing" id="PIb-o0-3iY"/>
-                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="leading" secondItem="27n-yE-OBg" secondAttribute="leading" id="QHb-1e-QYT"/>
-                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="top" secondItem="27n-yE-OBg" secondAttribute="top" id="mtL-jb-QIJ"/>
+                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="leading" secondItem="27n-yE-OBg" secondAttribute="leading" id="OaN-3B-qAg"/>
+                            <constraint firstAttribute="bottom" secondItem="9IU-Px-PeZ" secondAttribute="bottom" id="Rdz-wk-CuX"/>
+                            <constraint firstAttribute="trailing" secondItem="9IU-Px-PeZ" secondAttribute="trailing" id="gFg-1i-x2a"/>
+                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="top" secondItem="27n-yE-OBg" secondAttribute="top" id="mkw-xB-wtz"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="RjD-2x-Fo1">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="6kr-W5-jIy">
+                            <connections>
+                                <action selector="SaveButtonPressed:" destination="N3E-Kd-flF" id="4b9-Xo-eWi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="noteText" destination="9IU-Px-PeZ" id="eSw-ka-4tS"/>
@@ -189,7 +196,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emU-zE-svz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-504.5" y="867.5"/>
+            <point key="canvasLocation" x="-508.5" y="867.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="orR-c8-tTE">

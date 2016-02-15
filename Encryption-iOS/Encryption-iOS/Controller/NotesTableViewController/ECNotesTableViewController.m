@@ -9,13 +9,12 @@
 #import "ECNotesTableViewController.h"
 #import "ECNote.h"
 #import "ECNoteManager.h"
-#import "ECNoteViewController.h"
 
 NSString *const kreuseIdentifier = @"noteCell";
 
 @interface ECNotesTableViewController ()
 
-@property (strong, nonatomic) NSArray *notes;
+@property (strong, nonatomic) NSMutableArray *notes;
 
 @end
 
@@ -27,13 +26,13 @@ NSString *const kreuseIdentifier = @"noteCell";
     ECNote *note2 = [ECNote new];
     ECNote *note3 = [ECNote new];
     ECNote *note4 = [ECNote new];
-
+    
     note.noteText = @"LALALA";
     note2.noteText = @"333";
     note3.noteText = @"LAL333ALA";
     note4.noteText = @"LALALA54545";
-    self.notes = @[note, note2, note3, note4];
-
+    self.notes = [NSMutableArray arrayWithObjects:note, note2, note3, note4, nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +41,7 @@ NSString *const kreuseIdentifier = @"noteCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -64,38 +64,38 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Navigation
@@ -104,6 +104,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     if ([segue.identifier isEqualToString:@"addNote"]) {
         ECNoteViewController *detailsController = [segue destinationViewController];
         detailsController.currentNote = [ECNote new];
+        detailsController.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"noteDetails"]) {
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
@@ -112,5 +113,12 @@ NSString *const kreuseIdentifier = @"noteCell";
     }
 }
 
+#pragma mark - ECNoteDetailsDelegate
+
+- (void)detailsViewController:(ECNoteViewController *)controller saveNote:(ECNote *)note {
+    [self.notes addObject:note];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
+    [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 @end

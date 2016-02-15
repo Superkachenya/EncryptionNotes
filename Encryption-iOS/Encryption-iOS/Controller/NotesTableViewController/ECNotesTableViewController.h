@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECNoteViewController.h"
 
-@interface ECNotesTableViewController : UITableViewController
+
+@interface ECNotesTableViewController : UITableViewController <ECNoteDetailsDelegate>
 
 @end

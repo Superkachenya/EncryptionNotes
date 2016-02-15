@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ECNote;
+@class ECNote, ECNoteViewController;
+
+@protocol ECNoteDetailsDelegate <NSObject>
+
+- (void)detailsViewController:(ECNoteViewController *)controller saveNote:(ECNote *)note;
+
+@end
 
 @interface ECNoteViewController : UIViewController
 
 @property (strong, nonatomic) ECNote *currentNote;
+@property (weak, nonatomic) id<ECNoteDetailsDelegate>delegate;
 
 @end

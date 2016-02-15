@@ -25,5 +25,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+- (IBAction)SaveButtonPressed:(id)sender {
+    self.currentNote.noteText = self.noteText.text;
+    if ([self.delegate respondsToSelector:@selector(detailsViewController:saveNote:)]) {
+        [self.delegate detailsViewController:self saveNote:self.currentNote];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
