@@ -42,7 +42,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="enterButtonDidPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aY-1G-Bxi"/>
-                                    <segue destination="Wub-Aq-big" kind="presentation" id="oBQ-a4-AED"/>
+                                    <segue destination="Wub-Aq-big" kind="presentation" identifier="showNotes" id="oBQ-a4-AED"/>
                                 </connections>
                             </button>
                         </subviews>

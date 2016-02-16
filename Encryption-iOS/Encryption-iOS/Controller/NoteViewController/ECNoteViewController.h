@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ECNote, ECNoteViewController;
 
 @protocol ECNoteDetailsDelegate <NSObject>

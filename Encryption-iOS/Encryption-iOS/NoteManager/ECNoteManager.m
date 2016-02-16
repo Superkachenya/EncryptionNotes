@@ -8,7 +8,6 @@
 
 #import "ECNoteManager.h"
 #import "ECNote.h"
-#import "ECEncryptor.h"
 
 @implementation ECNoteManager
 
@@ -36,9 +35,8 @@
     formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
     for (ECNote *note in notes) {
         NSString *dateString = [formatter stringFromDate:note.creationDate];
-        NSString *encryptString = [self encryptMe:note.noteText];
         NSDictionary *tempDict = @{@"creationDate" : dateString,
-                                   @"noteText" : encryptString};
+                                   @"noteText" : note.noteText};
         [dictionary setObject:tempDict forKey:dateString];
     }
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
@@ -70,24 +68,6 @@
         }
     }
     return array;
-}
-
-- (NSString *)encryptMe:(NSString *)string {
-    NSString *key = @"CoolMan";
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    char *dataPtr = (char *) [data bytes];
-    char *keyData = (char *) [[key dataUsingEncoding:NSUTF8StringEncoding] bytes];
-    char *keyPtr = keyData;
-    int keyIndex = 0;
-    for (int x = 0; x < [data length]; x++)
-    {
-        *dataPtr = *dataPtr ^ *keyPtr;
-        dataPtr++;
-        keyPtr++;
-        if (++keyIndex == [key length])
-            keyIndex = 0, keyPtr = keyData;
-    }
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

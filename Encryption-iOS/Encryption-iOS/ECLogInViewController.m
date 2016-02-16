@@ -7,8 +7,10 @@
 //
 
 #import "ECLogInViewController.h"
+#import "ECNotesTableViewController.h"
 
 @interface ECLogInViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (assign, nonatomic) CGFloat centerYConstantValue;
@@ -47,9 +49,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)enterButtonDidPressed:(id)sender {
-    
+    NSLog(@"%@",self.passwordField.text);
 }
+
 - (IBAction)dismissKeyboard:(id)sender {
     [self.passwordField resignFirstResponder];
 }
@@ -63,4 +67,5 @@
 - (void)keyboardWillBeHidden:(NSNotification *)notification {
     self.centerYConstraint.constant = self.centerYConstantValue;
 }
+
 @end

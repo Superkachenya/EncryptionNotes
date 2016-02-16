@@ -10,6 +10,5 @@
 
 @interface ECLogInViewController : UIViewController
 
-
 @end
 

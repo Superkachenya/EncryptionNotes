@@ -8,12 +8,10 @@
 
 #import "ECNoteViewController.h"
 #import "ECNote.h"
-#import "ECNoteManager.h"
 
 @interface ECNoteViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *noteText;
-@property (strong, nonatomic) ECNoteManager *manager;
 
 @end
 
@@ -22,12 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.noteText.text = self.currentNote.noteText;
-    self.manager = [ECNoteManager sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 - (IBAction)SaveButtonPressed:(id)sender {
     self.currentNote.noteText = self.noteText.text;
     if ([self.delegate respondsToSelector:@selector(detailsViewController:saveNote:)]) {
