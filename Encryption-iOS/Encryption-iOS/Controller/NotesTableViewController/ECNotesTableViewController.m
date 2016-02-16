@@ -25,7 +25,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     [super viewDidLoad];
     self.manager = [ECNoteManager sharedInstance];
     self.notes = [self.manager loadNotes];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +34,10 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self.manager saveNotes:self.notes];
 }
 
 #pragma mark - Table view data source
@@ -56,8 +59,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     cell.textLabel.text = dateString;
     return cell;
 }
-
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -103,9 +104,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     [self.notes addObject:note];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
     [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.manager saveNotes:self.notes];
-    [self.tableView reloadData];
-    
 }
 
 @end

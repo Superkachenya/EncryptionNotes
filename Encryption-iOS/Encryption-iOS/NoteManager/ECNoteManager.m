@@ -66,7 +66,7 @@
             loadedNote.noteText = [currentNoteDict objectForKey:@"noteText"];
             [array addObject:loadedNote];
         }
-     }
+    }
     return array;
 }
 
