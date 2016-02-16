@@ -12,6 +12,7 @@
 @interface ECLogInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *enterButton;
 @property (assign, nonatomic) CGFloat centerYConstantValue;
 
 @end
@@ -50,7 +51,6 @@
 }
 
 - (IBAction)enterButtonDidPressed:(id)sender {
-    NSLog(@"%@",self.passwordField.text);
 }
 
 - (IBAction)dismissKeyboard:(id)sender {

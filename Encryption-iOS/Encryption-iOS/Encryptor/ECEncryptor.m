@@ -16,13 +16,13 @@
     char *keyData = (char *) [[key dataUsingEncoding:NSUTF8StringEncoding] bytes];
     char *keyPtr = keyData;
     int keyIndex = 0;
-    for (int x = 0; x < [data length]; x++)
-    {
+    for (int x = 0; x < [data length]; x++) {
         *dataPtr = *dataPtr ^ *keyPtr;
         dataPtr++;
         keyPtr++;
-        if (++keyIndex == [key length])
+        if (++keyIndex == [key length]) {
             keyIndex = 0, keyPtr = keyData;
+        }
     }
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }

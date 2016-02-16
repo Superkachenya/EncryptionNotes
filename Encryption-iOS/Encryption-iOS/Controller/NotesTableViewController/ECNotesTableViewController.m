@@ -34,6 +34,7 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    [self.manager saveNotes:self.notes UsingKey:self.key];
 }
 
 #pragma mark - Table view data source
@@ -99,7 +100,6 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)detailsViewController:(ECNoteViewController *)controller saveNote:(ECNote *)note {
     [self.notes addObject:note];
-    [self.manager saveNotes:self.notes UsingKey:self.key];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
     [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     

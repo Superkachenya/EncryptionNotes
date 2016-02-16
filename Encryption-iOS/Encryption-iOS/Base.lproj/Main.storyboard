@@ -62,6 +62,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="centerYConstraint" destination="IsZ-ac-aFM" id="WFO-JC-YHQ"/>
+                        <outlet property="enterButton" destination="eVj-Jf-fi3" id="Pvc-RE-HEk"/>
                         <outlet property="passwordField" destination="4vV-9h-t37" id="7sf-dV-H6Q"/>
                     </connections>
                 </viewController>
