@@ -14,29 +14,29 @@ NSString *const kNoteText = @"noteText";
 
 @interface ECNote ()
 
-@property (strong, nonatomic, readwrite) NSDate *creationDate;
+//@property (strong, nonatomic, readwrite) NSDate *creationDate;
 
 @end
 
 @implementation ECNote
 
-- (instancetype)init {
-    if (self = [super init]) {
+- (NSDate *)creationDate {
+    if (!_creationDate) {
         _creationDate = [NSDate date];
     }
-    return self;
+    return _creationDate;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:self.creationDate forKey:kCreationDate];
-    [coder encodeObject:self.noteText forKey:kNoteText];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)decoder {
-    if (self = [super init]) {
-        self.creationDate = [decoder decodeObjectForKey:kCreationDate];
-        self.noteText = [decoder decodeObjectForKey:kNoteText];
-    }
-    return self;
-}
+//- (void)encodeWithCoder:(NSCoder *)coder {
+//    [coder encodeObject:self.creationDate forKey:kCreationDate];
+//    [coder encodeObject:self.noteText forKey:kNoteText];
+//}
+//
+//- (instancetype)initWithCoder:(NSCoder *)decoder {
+//    if (self = [super init]) {
+//        self.creationDate = [decoder decodeObjectForKey:kCreationDate];
+//        self.noteText = [decoder decodeObjectForKey:kNoteText];
+//    }
+//    return self;
+//}
 @end

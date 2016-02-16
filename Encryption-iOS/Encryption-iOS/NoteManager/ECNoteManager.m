@@ -20,37 +20,54 @@
     return sharedInstance;
 }
 
-- (NSURL *)applicationDocumentsDirectory {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                                                   inDomains:NSUserDomainMask] lastObject];
+- (NSString *)fullPathToFile {
+    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                         inDomains:NSUserDomainMask] lastObject];
+    NSString *path = [url.path stringByAppendingPathComponent:@"notes.json"];
+    return path;
 }
 
 - (void)saveNotes:(NSMutableArray *)notes {
-    NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:@"notes.json"];
+    NSString *path = [self fullPathToFile];
     NSError *error = nil;
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"HH:mm:ss";
+    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
     for (ECNote *note in notes) {
-        ECNote *tempNote = note;
-        NSString *keyString = [formatter stringFromDate:tempNote.creationDate];
-        [dictionary setObject:tempNote.noteText forKey:keyString];
+        NSString *dateString = [formatter stringFromDate:note.creationDate];
+        NSDictionary *tempDict = @{@"creationDate" : dateString,
+                                   @"noteText" : note.noteText};
+        [dictionary setObject:tempDict forKey:dateString];
     }
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
     [jsonData writeToFile:path atomically:YES];
-    NSLog(@"%@",path);
 }
 
-- (ECNote *)loadNote {
-    NSString *filePath = [[self applicationDocumentsDirectory].path
-                          stringByAppendingPathComponent:@"notes.json"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {        
-    }
-    return nil;
+- (NSMutableArray *)loadNotes {
+    NSString *filePath = [self fullPathToFile];
+    NSMutableArray *array = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSError *error;
+        NSURL *localFileURL = [NSURL fileURLWithPath:filePath];
+        NSData *contentOfLocalFile = [NSData dataWithContentsOfURL:localFileURL];
+        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:contentOfLocalFile
+                                                                   options:NSJSONReadingAllowFragments
+                                                                     error:&error];
+        array = [NSMutableArray new];
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"MM/dd/YYYY HH:mm:ss"];
+        for (id note in jsonObject) {
+            NSDictionary *currentNoteDict = [jsonObject objectForKey:(NSString *)note];
+            NSDate *date = [dateFormatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
+            ECNote *loadedNote = [ECNote new];
+            loadedNote.creationDate = date;
+            loadedNote.noteText = [currentNoteDict objectForKey:@"noteText"];
+            [array addObject:loadedNote];
+        }
+     }
+    return array;
 }
-
 
 @end

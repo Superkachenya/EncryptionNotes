@@ -13,6 +13,6 @@
 
 + (instancetype)sharedInstance;
 - (void)saveNotes:(NSMutableArray *)not;
-- (ECNote *)loadNote;
+- (NSMutableArray *)loadNotes;
 
 @end

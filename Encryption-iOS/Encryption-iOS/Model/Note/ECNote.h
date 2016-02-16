@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ECNote : NSObject <NSCoding>
+@interface ECNote : NSObject //<NSCoding>
 
-@property (strong, nonatomic, readonly) NSDate *creationDate;
+@property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSString *noteText;
 
 @end
