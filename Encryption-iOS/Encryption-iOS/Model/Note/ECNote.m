@@ -10,11 +10,11 @@
 
 @implementation ECNote
 
-- (NSDate *)creationDate {
-    if (!_creationDate) {
+- (instancetype)init {
+    if (self = [super init]) {
         _creationDate = [NSDate date];
     }
-    return _creationDate;
+    return self;
 }
 
 @end

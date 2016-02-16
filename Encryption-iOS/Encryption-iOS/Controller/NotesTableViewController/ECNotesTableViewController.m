@@ -24,7 +24,7 @@ NSString *const kreuseIdentifier = @"noteCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.manager = [ECNoteManager sharedInstance];
-    self.notes = [self.manager loadNotes];
+    self.notes = [self.manager loadNotesUsingKey:self.key];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,10 +34,6 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [self.manager saveNotes:self.notes];
 }
 
 #pragma mark - Table view data source
@@ -64,6 +60,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.notes removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.manager saveNotes:self.notes UsingKey:self.key];
     }
 }
 
@@ -102,8 +99,10 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)detailsViewController:(ECNoteViewController *)controller saveNote:(ECNote *)note {
     [self.notes addObject:note];
+    [self.manager saveNotes:self.notes UsingKey:self.key];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
     [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
 }
 
 @end

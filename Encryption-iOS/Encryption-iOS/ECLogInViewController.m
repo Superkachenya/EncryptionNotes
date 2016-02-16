@@ -10,7 +10,6 @@
 #import "ECNotesTableViewController.h"
 
 @interface ECLogInViewController ()
-
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (assign, nonatomic) CGFloat centerYConstantValue;
@@ -33,7 +32,7 @@
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -66,6 +65,29 @@
 
 - (void)keyboardWillBeHidden:(NSNotification *)notification {
     self.centerYConstraint.constant = self.centerYConstantValue;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if (![self.passwordField.text isEqualToString:@"1234"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO"
+                                                                       message:@"Wrong Password"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                                       }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        if ([segue.identifier isEqualToString:@"showNotes"]) {
+            UINavigationController *navController = [segue destinationViewController];
+            ECNotesTableViewController *notesTable = navController.viewControllers[0];
+            notesTable.key = self.passwordField.text;
+        }
+    }
 }
 
 @end

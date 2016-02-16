@@ -8,6 +8,7 @@
 
 #import "ECNoteManager.h"
 #import "ECNote.h"
+#import "ECEncryptor.h"
 
 @implementation ECNoteManager
 
@@ -27,7 +28,7 @@
     return path;
 }
 
-- (void)saveNotes:(NSMutableArray *)notes {
+- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key {
     NSString *path = [self fullPathToFile];
     NSError *error = nil;
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
@@ -35,17 +36,19 @@
     formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
     for (ECNote *note in notes) {
         NSString *dateString = [formatter stringFromDate:note.creationDate];
+        NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
         NSDictionary *tempDict = @{@"creationDate" : dateString,
-                                   @"noteText" : note.noteText};
+                                   @"noteText" : encryptString};
         [dictionary setObject:tempDict forKey:dateString];
     }
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
     [jsonData writeToFile:path atomically:YES];
+    NSLog(@"%@",dictionary);
 }
 
-- (NSMutableArray *)loadNotes {
+- (NSMutableArray *)loadNotesUsingKey:(NSString *)key {
     NSString *filePath = [self fullPathToFile];
     NSMutableArray *array = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
@@ -63,10 +66,12 @@
             NSDate *date = [dateFormatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
             ECNote *loadedNote = [ECNote new];
             loadedNote.creationDate = date;
-            loadedNote.noteText = [currentNoteDict objectForKey:@"noteText"];
+            NSString *decryptedString = [ECEncryptor encryptMe:[currentNoteDict objectForKey:@"noteText"] withKey:key];
+            loadedNote.noteText = decryptedString;
             [array addObject:loadedNote];
         }
     }
+    NSLog(@"%@",array);
     return array;
 }
 

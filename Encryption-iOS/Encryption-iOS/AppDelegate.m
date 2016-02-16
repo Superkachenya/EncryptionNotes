@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ECNoteManager.h"
 
 @interface AppDelegate ()
 
