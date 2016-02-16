@@ -25,25 +25,31 @@
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
-- (void)saveNote:(ECNote *)note {
+- (void)saveNotes:(NSMutableArray *)notes {
+    NSString *path = [[self applicationDocumentsDirectory].path
+                      stringByAppendingPathComponent:@"notes.json"];
+    NSError *error = nil;
+    NSMutableDictionary *dictionary = [NSMutableDictionary new];
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"HH:mm:ss";
-    NSString *notePath = [NSString stringWithFormat:@"%@.txt", [formatter stringFromDate:note.creationDate]];
-    NSString *path = [[self applicationDocumentsDirectory].path
-                      stringByAppendingPathComponent:notePath];
-    [NSKeyedArchiver archiveRootObject:note toFile:path];
+    for (ECNote *note in notes) {
+        ECNote *tempNote = note;
+        NSString *keyString = [formatter stringFromDate:tempNote.creationDate];
+        [dictionary setObject:tempNote.noteText forKey:keyString];
+    }
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    [jsonData writeToFile:path atomically:YES];
     NSLog(@"%@",path);
 }
 
 - (ECNote *)loadNote {
-    ECNote *loadedNote = nil;
     NSString *filePath = [[self applicationDocumentsDirectory].path
-                          stringByAppendingPathComponent:@".txt"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        loadedNote = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                          stringByAppendingPathComponent:@"notes.json"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {        
     }
-    return loadedNote;
+    return nil;
 }
 
 

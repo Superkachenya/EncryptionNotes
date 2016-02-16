@@ -15,6 +15,7 @@ NSString *const kreuseIdentifier = @"noteCell";
 @interface ECNotesTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *notes;
+@property (strong, nonatomic) ECNoteManager *manager;
 
 @end
 
@@ -22,9 +23,8 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ECNoteManager *manager = [ECNoteManager sharedInstance];
+    self.manager = [ECNoteManager sharedInstance];
     self.notes = [NSMutableArray new];
-    [self.notes addObject: [manager loadNote]];
     
 }
 
@@ -103,6 +103,9 @@ NSString *const kreuseIdentifier = @"noteCell";
     [self.notes addObject:note];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
     [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.manager saveNotes:self.notes];
+    [self.tableView reloadData];
+    
 }
 
 @end

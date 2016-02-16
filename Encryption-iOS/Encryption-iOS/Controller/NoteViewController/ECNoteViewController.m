@@ -30,7 +30,6 @@
 }
 - (IBAction)SaveButtonPressed:(id)sender {
     self.currentNote.noteText = self.noteText.text;
-    [self.manager saveNote:self.currentNote];
     if ([self.delegate respondsToSelector:@selector(detailsViewController:saveNote:)]) {
         [self.delegate detailsViewController:self saveNote:self.currentNote];
     }
