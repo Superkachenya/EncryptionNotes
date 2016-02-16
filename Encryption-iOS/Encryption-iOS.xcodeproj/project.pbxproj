@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E5F0B501C732E3700FCB127 /* ECEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F0B4F1C732E3700FCB127 /* ECEncryptor.m */; };
 		8EBE92DD1C6DE985000957B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92DC1C6DE985000957B4 /* main.m */; };
 		8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92DF1C6DE985000957B4 /* AppDelegate.m */; };
 		8EBE92E31C6DE985000957B4 /* ECLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE92E21C6DE985000957B4 /* ECLogInViewController.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E5F0B4E1C732E3700FCB127 /* ECEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECEncryptor.h; path = Encryptor/ECEncryptor.h; sourceTree = "<group>"; };
+		8E5F0B4F1C732E3700FCB127 /* ECEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECEncryptor.m; path = Encryptor/ECEncryptor.m; sourceTree = "<group>"; };
 		8EBE92D81C6DE985000957B4 /* Encryption-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Encryption-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBE92DC1C6DE985000957B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8EBE92DE1C6DE985000957B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E5F0B511C732E3B00FCB127 /* Encryptor */ = {
+			isa = PBXGroup;
+			children = (
+				8E5F0B4E1C732E3700FCB127 /* ECEncryptor.h */,
+				8E5F0B4F1C732E3700FCB127 /* ECEncryptor.m */,
+			);
+			name = Encryptor;
+			sourceTree = "<group>";
+		};
 		8EBE92CF1C6DE985000957B4 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +127,7 @@
 			children = (
 				8EBE92DE1C6DE985000957B4 /* AppDelegate.h */,
 				8EBE92DF1C6DE985000957B4 /* AppDelegate.m */,
+				8E5F0B511C732E3B00FCB127 /* Encryptor */,
 				8EBE93201C6E10D1000957B4 /* NoteManager */,
 				8EBE93121C6DFD69000957B4 /* Model */,
 				8EBE93141C6DFE35000957B4 /* Controller */,
@@ -353,6 +366,7 @@
 				8EBE92E01C6DE985000957B4 /* AppDelegate.m in Sources */,
 				8EBE93171C6DFE72000957B4 /* ECNotesTableViewController.m in Sources */,
 				8EBE931B1C6E02F0000957B4 /* ECNoteViewController.m in Sources */,
+				8E5F0B501C732E3700FCB127 /* ECEncryptor.m in Sources */,
 				8EBE92DD1C6DE985000957B4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +591,7 @@
 				8EBE93071C6DE986000957B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8EBE93081C6DE986000957B4 /* Build configuration list for PBXNativeTarget "Encryption-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -585,6 +600,7 @@
 				8EBE930A1C6DE986000957B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8EBE930B1C6DE986000957B4 /* Build configuration list for PBXNativeTarget "Encryption-iOSUITests" */ = {
 			isa = XCConfigurationList;
@@ -593,6 +609,7 @@
 				8EBE930D1C6DE986000957B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
