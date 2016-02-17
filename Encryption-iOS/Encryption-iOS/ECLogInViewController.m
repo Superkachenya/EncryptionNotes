@@ -74,7 +74,9 @@
 }
 
 - (IBAction)editingChanged:(UITextField *)sender {
-    self.enterButton.enabled = sender.text.length > 0;
+    if (sender.text.length > 0) {
+        self.enterButton.enabled = YES;
+    }
 }
 
 #pragma mark - Navigation

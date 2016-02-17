@@ -11,9 +11,9 @@
 @implementation ECEncryptor
 
 + (NSString *)encryptMe:(NSString *)string withKey:(NSString *)key {
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [string dataUsingEncoding:NSWindowsCP1251StringEncoding];
     char *dataPtr = (char *) [data bytes];
-    char *keyData = (char *) [[key dataUsingEncoding:NSUTF8StringEncoding] bytes];
+    char *keyData = (char *) [[key dataUsingEncoding:NSWindowsCP1251StringEncoding] bytes];
     char *keyPtr = keyData;
     int keyIndex = 0;
     for (int x = 0; x < [data length]; x++) {
@@ -24,6 +24,6 @@
             keyIndex = 0, keyPtr = keyData;
         }
     }
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [[NSString alloc] initWithData:data encoding:NSWindowsCP1251StringEncoding];
 }
 @end

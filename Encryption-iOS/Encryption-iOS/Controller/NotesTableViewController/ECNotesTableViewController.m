@@ -32,9 +32,12 @@ NSString *const kreuseIdentifier = @"noteCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [self.manager saveNotes:self.notes UsingKey:self.key];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
 }
 
 #pragma mark - Table view data source

@@ -173,6 +173,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="noteTextView" destination="9IU-Px-PeZ" id="XZy-aO-pet"/>
+                        <outlet property="topLayout" destination="mkw-xB-wtz" id="iA1-MP-uwF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31J-am-gWu" userLabel="First Responder" sceneMemberID="firstResponder"/>

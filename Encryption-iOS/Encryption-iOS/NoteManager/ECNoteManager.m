@@ -63,6 +63,7 @@
         [dateFormatter setDateFormat:@"MM/dd/YYYY HH:mm:ss"];
         for (id note in jsonObject) {
             NSDictionary *currentNoteDict = [jsonObject objectForKey:(NSString *)note];
+            NSLog(@"%@",currentNoteDict);
             NSDate *date = [dateFormatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
             ECNote *loadedNote = [ECNote new];
             loadedNote.creationDate = date;
@@ -71,7 +72,6 @@
             [array addObject:loadedNote];
         }
     }
-    NSLog(@"%@",array);
     return array;
 }
 
