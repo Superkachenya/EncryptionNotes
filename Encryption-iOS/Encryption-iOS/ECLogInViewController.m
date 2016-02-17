@@ -10,6 +10,7 @@
 #import "ECNotesTableViewController.h"
 
 @interface ECLogInViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *enterButton;
@@ -57,7 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - keyboard manipulation
+#pragma mark - Keyboard manipulation
 
 - (IBAction)dismissKeyboard:(id)sender {
     [self.passwordField resignFirstResponder];
@@ -94,25 +95,25 @@
     }
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    BOOL result = NO;
-    if ([self.passwordField.text isEqualToString:@"1234"]) {
-        result = YES;
-    } else {
-        __weak ECLogInViewController *weakSelf = self;
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Try again"
-                                                                       message:@"Wrong Password"
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                           [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                                                       }];
-        [alert addAction:action];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    return result;
-}
+//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+//    BOOL result = NO;
+//    if ([self.passwordField.text isEqualToString:@"1234"]) {
+//        result = YES;
+//    } else {
+//        __weak ECLogInViewController *weakSelf = self;
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Try again"
+//                                                                       message:@"Wrong Password"
+//                                                                preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+//                                                         style:UIAlertActionStyleDefault
+//                                                       handler:^(UIAlertAction * _Nonnull action) {
+//                                                           [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//                                                       }];
+//        [alert addAction:action];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
+//    return result;
+//}
 
 
 @end

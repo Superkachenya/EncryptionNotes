@@ -28,35 +28,42 @@
     return path;
 }
 
-- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key {
+- (void)saveNote:(ECNote *)note usingKey:(NSString *)key {
     NSString *path = [self fullPathToFile];
     NSError *error = nil;
-    NSMutableDictionary *dictionary = [NSMutableDictionary new];
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
-    for (ECNote *note in notes) {
-        NSString *dateString = [formatter stringFromDate:note.creationDate];
-        NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
-        NSDictionary *tempDict = @{@"creationDate" : dateString,
-                                   @"noteText" : encryptString};
-        [dictionary setObject:tempDict forKey:dateString];
+    NSString *dateString = [formatter stringFromDate:note.creationDate];
+    NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
+    NSDictionary *inDict = @{@"creationDate" : dateString,
+                                 @"noteText" : encryptString};
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
+        NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:contentOfLocalFile
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:&error]mutableCopy];
+        [jsonDict setObject:inDict forKey:dateString];
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        [jsonData writeToFile:path atomically:YES];
+    } else {
+        NSDictionary *dict = @{dateString : inDict};
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        [jsonData writeToFile:path atomically:YES];
     }
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
-    [jsonData writeToFile:path atomically:YES];
-    NSLog(@"%@",dictionary);
 }
 
 - (NSMutableArray *)loadNotesUsingKey:(NSString *)key {
-    NSString *filePath = [self fullPathToFile];
+    NSString *path = [self fullPathToFile];
     NSMutableArray *array = nil;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSError *error;
-        NSURL *localFileURL = [NSURL fileURLWithPath:filePath];
-        NSData *contentOfLocalFile = [NSData dataWithContentsOfURL:localFileURL];
+        NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
         NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:contentOfLocalFile
-                                                                   options:NSJSONReadingAllowFragments
+                                                                   options:NSJSONReadingMutableContainers
                                                                      error:&error];
         array = [NSMutableArray new];
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -74,5 +81,26 @@
     }
     return array;
 }
+
+//- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key {
+//    NSString *path = [self fullPathToFile];
+//    NSError *error = nil;
+//    NSMutableDictionary *dictionary = [NSMutableDictionary new];
+//    NSDateFormatter *formatter = [NSDateFormatter new];
+//    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
+//    for (ECNote *note in notes) {
+//        NSString *dateString = [formatter stringFromDate:note.creationDate];
+//        NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
+//        NSDictionary *tempDict = @{@"creationDate" : dateString,
+//                                   @"noteText" : encryptString};
+//        [dictionary setObject:tempDict forKey:dateString];
+//    }
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:&error];
+//    [jsonData writeToFile:path atomically:YES];
+//    NSLog(@"%@",dictionary);
+//}
+
 
 @end

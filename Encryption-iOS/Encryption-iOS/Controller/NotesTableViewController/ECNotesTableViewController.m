@@ -40,7 +40,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     [super viewDidAppear:YES];
     
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
-    [self.manager saveNotes:self.notes UsingKey:self.key];
 }
 
 #pragma mark - Table view data source
@@ -67,7 +66,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.notes removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.manager saveNotes:self.notes UsingKey:self.key];
     }
 }
 
@@ -93,11 +91,13 @@ NSString *const kreuseIdentifier = @"noteCell";
     if ([segue.identifier isEqualToString:@"addNote"]) {
         ECNoteViewController *detailsController = [segue destinationViewController];
         detailsController.delegate = self;
+        detailsController.key = self.key;
     }
     if ([segue.identifier isEqualToString:@"noteDetails"]) {
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
         ECNoteViewController *detailsController = [segue destinationViewController];
         detailsController.currentNote = self.notes[indexPath.row];
+        detailsController.key = self.key;
     }
 }
 

@@ -8,12 +8,14 @@
 
 #import "ECNoteViewController.h"
 #import "ECNote.h"
+#import "ECNoteManager.h"
 
 @interface ECNoteViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLayout;
 @property (assign, nonatomic) CGFloat layoutConstant;
+@property (strong, nonatomic) ECNoteManager *manager;
 
 @end
 
@@ -26,6 +28,7 @@
         [self.noteTextView becomeFirstResponder];
     }
     self.layoutConstant = self.topLayout.constant;
+    self.manager = [ECNoteManager sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,11 +77,13 @@
 }
 
 - (IBAction)SaveButtonPressed:(id)sender {
-    self.currentNote.noteText = self.noteTextView.text;
-    if (self.delegate) {
-        self.currentNote = [ECNote new];
+    if (!self.delegate) {
         self.currentNote.noteText = self.noteTextView.text;
-        [self.delegate detailsViewController:self saveNote:self.currentNote];
+    } else {
+        ECNote *newNote = [ECNote new];
+        newNote.noteText = self.noteTextView.text;
+        [self.manager saveNote:newNote usingKey:self.key];
+        [self.delegate detailsViewController:self saveNote:newNote];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

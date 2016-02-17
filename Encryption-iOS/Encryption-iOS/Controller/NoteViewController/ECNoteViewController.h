@@ -18,6 +18,7 @@
 
 @interface ECNoteViewController : UIViewController
 
+@property (strong, nonatomic) NSString *key;
 @property (strong, nonatomic) ECNote *currentNote;
 @property (weak, nonatomic) id<ECNoteDetailsDelegate>delegate;
 

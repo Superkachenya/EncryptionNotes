@@ -12,7 +12,9 @@
 @interface ECNoteManager : NSObject
 
 + (instancetype)sharedInstance;
-- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key;
+//- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key;
 - (NSMutableArray *)loadNotesUsingKey:(NSString *)key;
+- (void)saveNote:(ECNote *)note usingKey:(NSString *)key;
+
 
 @end
