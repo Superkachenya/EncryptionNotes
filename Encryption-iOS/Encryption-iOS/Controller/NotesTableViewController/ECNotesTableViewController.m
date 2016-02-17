@@ -23,8 +23,12 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.manager = [ECNoteManager sharedInstance];
     self.notes = [self.manager loadNotesUsingKey:self.key];
+    if (!self.notes) {
+        self.notes = [NSMutableArray new];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,11 +37,10 @@ NSString *const kreuseIdentifier = @"noteCell";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [self.manager saveNotes:self.notes UsingKey:self.key];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
 }
 
 #pragma mark - Table view data source

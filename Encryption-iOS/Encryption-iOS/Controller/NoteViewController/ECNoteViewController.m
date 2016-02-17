@@ -32,7 +32,9 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -45,6 +47,8 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
@@ -72,7 +76,7 @@
 
 - (IBAction)SaveButtonPressed:(id)sender {
     self.currentNote.noteText = self.noteTextView.text;
-    if ([self.delegate respondsToSelector:@selector(detailsViewController:saveNote:)]) {
+    if (self.delegate) {
         self.currentNote = [ECNote new];
         self.currentNote.noteText = self.noteTextView.text;
         [self.delegate detailsViewController:self saveNote:self.currentNote];

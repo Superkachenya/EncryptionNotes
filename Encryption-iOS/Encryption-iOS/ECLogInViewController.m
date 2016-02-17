@@ -21,12 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.centerYConstantValue = self.centerYConstraint.constant;
     self.enterButton.enabled = NO;
     self.passwordField.delegate = self;
 }
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -39,6 +42,8 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
