@@ -11,7 +11,7 @@
 
 @interface ECNoteViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextView *noteText;
+@property (weak, nonatomic) IBOutlet UITextView *noteTextView;
 
 @end
 
@@ -19,16 +19,63 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.noteText.text = self.currentNote.noteText;
+    self.noteTextView.text = self.currentNote.noteText;
+    if (!self.noteTextView.text.length) {
+        [self.noteTextView becomeFirstResponder];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.noteTextView.contentInset = contentInsets;
+    self.noteTextView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.noteTextView.frame.origin) ) {
+        [self.noteTextView scrollRectToVisible:self.noteTextView.frame animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.noteTextView.contentInset = contentInsets;
+    self.noteTextView.scrollIndicatorInsets = contentInsets;
+}
+
 - (IBAction)SaveButtonPressed:(id)sender {
-    self.currentNote.noteText = self.noteText.text;
+    self.currentNote.noteText = self.noteTextView.text;
     if ([self.delegate respondsToSelector:@selector(detailsViewController:saveNote:)]) {
+        self.currentNote = [ECNote new];
+        self.currentNote.noteText = self.noteTextView.text;
         [self.delegate detailsViewController:self saveNote:self.currentNote];
     }
     [self.navigationController popViewControllerAnimated:YES];

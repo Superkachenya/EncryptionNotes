@@ -25,6 +25,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChanged:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Sxh-Q2-3KF"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVj-Jf-fi3">
                                 <rect key="frame" x="88" y="357" width="200" height="30"/>
@@ -41,7 +44,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="enterButtonDidPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0aY-1G-Bxi"/>
                                     <segue destination="Wub-Aq-big" kind="presentation" identifier="showNotes" id="oBQ-a4-AED"/>
                                 </connections>
                             </button>
@@ -170,7 +172,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="noteText" destination="9IU-Px-PeZ" id="eSw-ka-4tS"/>
+                        <outlet property="noteTextView" destination="9IU-Px-PeZ" id="XZy-aO-pet"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31J-am-gWu" userLabel="First Responder" sceneMemberID="firstResponder"/>

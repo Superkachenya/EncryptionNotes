@@ -86,7 +86,6 @@ NSString *const kreuseIdentifier = @"noteCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"addNote"]) {
         ECNoteViewController *detailsController = [segue destinationViewController];
-        detailsController.currentNote = [ECNote new];
         detailsController.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"noteDetails"]) {

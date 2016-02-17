@@ -9,7 +9,7 @@
 #import "ECLogInViewController.h"
 #import "ECNotesTableViewController.h"
 
-@interface ECLogInViewController ()
+@interface ECLogInViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerYConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *enterButton;
@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.centerYConstantValue = self.centerYConstraint.constant;
+    self.enterButton.enabled = NO;
+    self.passwordField.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -50,8 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)enterButtonDidPressed:(id)sender {
-}
+#pragma mark - keyboard manipulation
 
 - (IBAction)dismissKeyboard:(id)sender {
     [self.passwordField resignFirstResponder];
@@ -67,11 +68,20 @@
     self.centerYConstraint.constant = self.centerYConstantValue;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.passwordField resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)editingChanged:(UITextField *)sender {
+    self.enterButton.enabled = sender.text.length > 0;
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (![self.passwordField.text isEqualToString:@"1234"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NO"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Try again"
                                                                        message:@"Wrong Password"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
