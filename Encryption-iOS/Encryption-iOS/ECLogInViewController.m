@@ -87,24 +87,32 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if (![self.passwordField.text isEqualToString:@"1234"]) {
+        if ([segue.identifier isEqualToString:@"showNotes"]) {
+            UINavigationController *navController = [segue destinationViewController];
+            ECNotesTableViewController *notesTable = navController.viewControllers[0];
+            notesTable.key = self.passwordField.text;
+    }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    BOOL result = NO;
+    if ([self.passwordField.text isEqualToString:@"1234"]) {
+        result = YES;
+    } else {
+        __weak ECLogInViewController *weakSelf = self;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Try again"
                                                                        message:@"Wrong Password"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                                           [weakSelf dismissViewControllerAnimated:YES completion:nil];
                                                        }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
-    } else {
-        if ([segue.identifier isEqualToString:@"showNotes"]) {
-            UINavigationController *navController = [segue destinationViewController];
-            ECNotesTableViewController *notesTable = navController.viewControllers[0];
-            notesTable.key = self.passwordField.text;
-        }
     }
+    return result;
 }
+
 
 @end
