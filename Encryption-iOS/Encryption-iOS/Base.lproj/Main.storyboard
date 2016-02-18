@@ -138,7 +138,7 @@
         <!--Note-->
         <scene sceneID="RBz-Xt-zvD">
             <objects>
-                <viewController title="Note" id="N3E-Kd-flF" customClass="ECNoteViewController" sceneMemberID="viewController">
+                <viewController title="Note" automaticallyAdjustsScrollViewInsets="NO" id="N3E-Kd-flF" customClass="ECNoteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HIe-Zo-ejX"/>
                         <viewControllerLayoutGuide type="bottom" id="WaS-b4-LGn"/>
@@ -148,7 +148,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9IU-Px-PeZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -156,10 +156,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="top" secondItem="HIe-Zo-ejX" secondAttribute="bottom" id="FFt-B0-Nbc"/>
                             <constraint firstItem="9IU-Px-PeZ" firstAttribute="leading" secondItem="27n-yE-OBg" secondAttribute="leading" id="OaN-3B-qAg"/>
                             <constraint firstAttribute="bottom" secondItem="9IU-Px-PeZ" secondAttribute="bottom" id="Rdz-wk-CuX"/>
                             <constraint firstAttribute="trailing" secondItem="9IU-Px-PeZ" secondAttribute="trailing" id="gFg-1i-x2a"/>
-                            <constraint firstItem="9IU-Px-PeZ" firstAttribute="top" secondItem="27n-yE-OBg" secondAttribute="top" id="mkw-xB-wtz"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -173,7 +173,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="noteTextView" destination="9IU-Px-PeZ" id="XZy-aO-pet"/>
-                        <outlet property="topLayout" destination="mkw-xB-wtz" id="iA1-MP-uwF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31J-am-gWu" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -13,8 +13,6 @@
 @interface ECNoteViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *noteTextView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLayout;
-@property (assign, nonatomic) CGFloat layoutConstant;
 @property (strong, nonatomic) ECNoteManager *manager;
 
 @end
@@ -27,7 +25,6 @@
     if (!self.noteTextView.text.length) {
         [self.noteTextView becomeFirstResponder];
     }
-    self.layoutConstant = self.topLayout.constant;
     self.manager = [ECNoteManager sharedInstance];
 }
 
@@ -65,14 +62,12 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.noteTextView.contentInset = contentInsets;
     self.noteTextView.scrollIndicatorInsets = contentInsets;
-    self.topLayout.constant = kbSize.height /4;
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.noteTextView.contentInset = contentInsets;
     self.noteTextView.scrollIndicatorInsets = contentInsets;
-    self.topLayout.constant = self.layoutConstant;
 }
 
 #pragma mark - save note
