@@ -76,9 +76,12 @@
     self.topLayout.constant = self.layoutConstant;
 }
 
+#pragma mark - save note
+
 - (IBAction)SaveButtonPressed:(id)sender {
     if (!self.delegate) {
         self.currentNote.noteText = self.noteTextView.text;
+        [self.manager saveNote:self.currentNote usingKey:self.key];
     } else {
         ECNote *newNote = [ECNote new];
         newNote.noteText = self.noteTextView.text;

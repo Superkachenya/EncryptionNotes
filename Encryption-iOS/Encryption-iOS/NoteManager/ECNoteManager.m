@@ -32,7 +32,8 @@
     NSString *path = [self fullPathToFile];
     NSError *error = nil;
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
+    formatter.dateFormat = @"MM/dd/yyyy HH:mm:ss";
+    formatter.timeZone = [NSTimeZone systemTimeZone];
     NSString *dateString = [formatter stringFromDate:note.creationDate];
     NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
     NSDictionary *inDict = @{@"creationDate" : dateString,
@@ -40,12 +41,14 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
         NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:contentOfLocalFile
-                                                                   options:NSJSONReadingMutableContainers
+                                                                   options:NSJSONReadingAllowFragments
                                                                      error:&error]mutableCopy];
         [jsonDict setObject:inDict forKey:dateString];
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
                                                            options:NSJSONWritingPrettyPrinted
                                                              error:&error];
+        NSLog(@"%@",jsonData);
+        NSLog(@"%@",jsonDict);
         [jsonData writeToFile:path atomically:YES];
     } else {
         NSDictionary *dict = @{dateString : inDict};
@@ -62,16 +65,18 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSError *error;
         NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
-        NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:contentOfLocalFile
-                                                                   options:NSJSONReadingMutableContainers
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:contentOfLocalFile
+                                                                   options:NSJSONReadingAllowFragments
                                                                      error:&error];
         array = [NSMutableArray new];
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"MM/dd/YYYY HH:mm:ss"];
-        for (id note in jsonObject) {
-            NSDictionary *currentNoteDict = [jsonObject objectForKey:(NSString *)note];
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss"];
+        formatter.locale = [NSLocale currentLocale];
+        formatter.timeZone = [NSTimeZone systemTimeZone];
+        for (id note in jsonData) {
+            NSDictionary *currentNoteDict = [jsonData objectForKey:(NSString *)note];
             NSLog(@"%@",currentNoteDict);
-            NSDate *date = [dateFormatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
+            NSDate *date = [formatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
             ECNote *loadedNote = [ECNote new];
             loadedNote.creationDate = date;
             NSString *decryptedString = [ECEncryptor encryptMe:[currentNoteDict objectForKey:@"noteText"] withKey:key];
@@ -82,25 +87,18 @@
     return array;
 }
 
-//- (void)saveNotes:(NSMutableArray *)notes UsingKey:(NSString *)key {
-//    NSString *path = [self fullPathToFile];
-//    NSError *error = nil;
-//    NSMutableDictionary *dictionary = [NSMutableDictionary new];
-//    NSDateFormatter *formatter = [NSDateFormatter new];
-//    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
-//    for (ECNote *note in notes) {
-//        NSString *dateString = [formatter stringFromDate:note.creationDate];
-//        NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
-//        NSDictionary *tempDict = @{@"creationDate" : dateString,
-//                                   @"noteText" : encryptString};
-//        [dictionary setObject:tempDict forKey:dateString];
-//    }
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:&error];
-//    [jsonData writeToFile:path atomically:YES];
-//    NSLog(@"%@",dictionary);
-//}
-
+- (void)removeNoteForKey:(NSString *)key {
+    NSString *path = [self fullPathToFile];
+    NSError *error = nil;
+    NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
+    NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:contentOfLocalFile
+                                                                     options:NSJSONReadingMutableContainers
+                                                                       error:&error]mutableCopy];
+    [jsonDict removeObjectForKey:key];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    [jsonData writeToFile:path atomically:YES];
+}
 
 @end

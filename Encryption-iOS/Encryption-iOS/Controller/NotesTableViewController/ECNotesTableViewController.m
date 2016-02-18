@@ -56,7 +56,8 @@ NSString *const kreuseIdentifier = @"noteCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kreuseIdentifier forIndexPath:indexPath];
     ECNote *currentNote = self.notes[indexPath.row];
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
+    formatter.dateFormat = @"MM/dd/yyyy HH:mm:ss";
+    formatter.timeZone = [NSTimeZone systemTimeZone];
     NSString *dateString = [formatter stringFromDate:currentNote.creationDate];
     cell.textLabel.text = dateString;
     return cell;
@@ -64,6 +65,11 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        ECNote *removedNote = self.notes[indexPath.row];
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
+        NSString *key = [formatter stringFromDate:removedNote.creationDate];
+        [self.manager removeNoteForKey:key];
         [self.notes removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
