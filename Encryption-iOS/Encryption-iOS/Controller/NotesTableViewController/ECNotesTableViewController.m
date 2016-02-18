@@ -67,7 +67,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ECNote *removedNote = self.notes[indexPath.row];
         NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"MM/dd/YYYY HH:mm:ss";
+        formatter.dateFormat = @"MM/dd/yyyy HH:mm:ss";
         NSString *key = [formatter stringFromDate:removedNote.creationDate];
         [self.manager removeNoteForKey:key];
         [self.notes removeObjectAtIndex:indexPath.row];
@@ -81,13 +81,13 @@ NSString *const kreuseIdentifier = @"noteCell";
         [self.tableView setEditing:NO animated:NO];
         [self.tableView reloadData];
         [self.navigationItem.leftBarButtonItem setTitle:@"Edit"];
-        [self.navigationItem.leftBarButtonItem setStyle:UIBarButtonItemStylePlain];
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     } else {
         [super setEditing:YES animated:YES];
         [self.tableView setEditing:YES animated:YES];
         [self.tableView reloadData];
         [self.navigationItem.leftBarButtonItem setTitle:@"Done"];
-        [self.navigationItem.leftBarButtonItem setStyle:UIBarButtonItemStyleDone];
+        self.navigationItem.rightBarButtonItem.enabled = NO;
     }
 }
 

@@ -35,7 +35,7 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -48,7 +48,7 @@
                                                object:nil];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
