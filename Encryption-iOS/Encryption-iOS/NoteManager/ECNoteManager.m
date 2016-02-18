@@ -37,12 +37,12 @@
     NSString *dateString = [formatter stringFromDate:note.creationDate];
     NSString *encryptString = [ECEncryptor encryptMe:note.noteText withKey:key];
     NSDictionary *inDict = @{@"creationDate" : dateString,
-                                 @"noteText" : encryptString};
+                             @"noteText" : encryptString};
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
         NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:contentOfLocalFile
-                                                                   options:NSJSONReadingAllowFragments
-                                                                     error:&error]mutableCopy];
+                                                                         options:NSJSONReadingAllowFragments
+                                                                           error:&error]mutableCopy];
         [jsonDict setObject:inDict forKey:dateString];
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
                                                            options:NSJSONWritingPrettyPrinted
@@ -66,8 +66,8 @@
         NSError *error;
         NSData *contentOfLocalFile = [NSData dataWithContentsOfFile:path];
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:contentOfLocalFile
-                                                                   options:NSJSONReadingAllowFragments
-                                                                     error:&error];
+                                                                 options:NSJSONReadingAllowFragments
+                                                                   error:&error];
         array = [NSMutableArray new];
         NSDateFormatter *formatter = [NSDateFormatter new];
         [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss"];

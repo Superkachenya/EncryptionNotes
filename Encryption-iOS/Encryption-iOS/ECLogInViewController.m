@@ -95,24 +95,4 @@
     }
 }
 
-//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-//    BOOL result = NO;
-//    if ([self.passwordField.text isEqualToString:@"1234"]) {
-//        result = YES;
-//    } else {
-//        __weak ECLogInViewController *weakSelf = self;
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Try again"
-//                                                                       message:@"Wrong Password"
-//                                                                preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-//                                                         style:UIAlertActionStyleDefault
-//                                                       handler:^(UIAlertAction * _Nonnull action) {
-//                                                           [weakSelf dismissViewControllerAnimated:YES completion:nil];
-//                                                       }];
-//        [alert addAction:action];
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
-//    return result;
-//}
-
 @end

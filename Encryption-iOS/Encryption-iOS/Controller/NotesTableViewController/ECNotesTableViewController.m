@@ -113,7 +113,6 @@ NSString *const kreuseIdentifier = @"noteCell";
     [self.notes addObject:note];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
     [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
 }
 
 @end
