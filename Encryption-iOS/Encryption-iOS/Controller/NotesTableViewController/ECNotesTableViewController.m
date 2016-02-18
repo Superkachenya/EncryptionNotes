@@ -96,7 +96,7 @@ NSString *const kreuseIdentifier = @"noteCell";
     if ([segue.identifier isEqualToString:@"addNote"]) {
         ECNoteViewController *detailsController = [segue destinationViewController];
         detailsController.key = self.key;
-        detailsController.newNote = ^(ECNote *note){
+        detailsController.newNote = ^(ECNote *note) {
             [self.notes addObject:note];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
             [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

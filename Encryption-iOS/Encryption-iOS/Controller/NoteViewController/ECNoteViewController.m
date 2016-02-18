@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.noteTextView.text = self.currentNote.noteText;
     if (!self.noteTextView.text.length) {
         [self.noteTextView becomeFirstResponder];
@@ -57,15 +58,15 @@
                                                   object:nil];
 }
 
-- (void)keyboardWasShown:(NSNotification*)aNotification {
-    NSDictionary* info = [aNotification userInfo];
+- (void)keyboardWasShown:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.noteTextView.contentInset = contentInsets;
     self.noteTextView.scrollIndicatorInsets = contentInsets;
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+- (void)keyboardWillBeHidden:(NSNotification*)notification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.noteTextView.contentInset = contentInsets;
     self.noteTextView.scrollIndicatorInsets = contentInsets;
