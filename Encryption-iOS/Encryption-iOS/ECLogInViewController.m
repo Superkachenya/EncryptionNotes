@@ -28,7 +28,7 @@
     self.passwordField.delegate = self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -42,7 +42,7 @@
     
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self

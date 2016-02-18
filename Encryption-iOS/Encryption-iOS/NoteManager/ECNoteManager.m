@@ -47,8 +47,6 @@
         NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict
                                                            options:NSJSONWritingPrettyPrinted
                                                              error:&error];
-        NSLog(@"%@",jsonData);
-        NSLog(@"%@",jsonDict);
         [jsonData writeToFile:path atomically:YES];
     } else {
         NSDictionary *dict = @{dateString : inDict};
@@ -75,7 +73,6 @@
         formatter.timeZone = [NSTimeZone systemTimeZone];
         for (id note in jsonData) {
             NSDictionary *currentNoteDict = [jsonData objectForKey:(NSString *)note];
-            NSLog(@"%@",currentNoteDict);
             NSDate *date = [formatter dateFromString: [currentNoteDict objectForKey:@"creationDate"]];
             ECNote *loadedNote = [ECNote new];
             loadedNote.creationDate = date;
