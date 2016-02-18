@@ -166,7 +166,7 @@
                     <navigationItem key="navigationItem" title="Title" id="RjD-2x-Fo1">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="6kr-W5-jIy">
                             <connections>
-                                <action selector="SaveButtonPressed:" destination="N3E-Kd-flF" id="4b9-Xo-eWi"/>
+                                <action selector="saveButtonPressed:" destination="N3E-Kd-flF" id="sa8-Uc-b9D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

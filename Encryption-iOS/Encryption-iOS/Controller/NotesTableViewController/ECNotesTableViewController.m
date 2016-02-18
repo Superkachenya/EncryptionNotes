@@ -14,7 +14,6 @@ NSString *const kreuseIdentifier = @"noteCell";
 
 @interface ECNotesTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray *notes;
 @property (strong, nonatomic) ECNoteManager *manager;
 
 @end
@@ -96,8 +95,12 @@ NSString *const kreuseIdentifier = @"noteCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"addNote"]) {
         ECNoteViewController *detailsController = [segue destinationViewController];
-        detailsController.delegate = self;
         detailsController.key = self.key;
+        detailsController.newNote = ^(ECNote *note){
+            [self.notes addObject:note];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
+            [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        };
     }
     if ([segue.identifier isEqualToString:@"noteDetails"]) {
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
@@ -105,14 +108,6 @@ NSString *const kreuseIdentifier = @"noteCell";
         detailsController.currentNote = self.notes[indexPath.row];
         detailsController.key = self.key;
     }
-}
-
-#pragma mark - ECNoteDetailsDelegate
-
-- (void)detailsViewController:(ECNoteViewController *)controller saveNote:(ECNote *)note {
-    [self.notes addObject:note];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.notes count] - 1) inSection:0];
-    [self. tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

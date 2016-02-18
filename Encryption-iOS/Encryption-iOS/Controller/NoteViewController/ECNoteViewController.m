@@ -9,6 +9,7 @@
 #import "ECNoteViewController.h"
 #import "ECNote.h"
 #import "ECNoteManager.h"
+#import "ECNotesTableViewController.h"
 
 @interface ECNoteViewController ()
 
@@ -72,15 +73,15 @@
 
 #pragma mark - save note
 
-- (IBAction)SaveButtonPressed:(id)sender {
-    if (!self.delegate) {
+- (IBAction)saveButtonPressed:(id)sender {
+    if (self.currentNote) {
         self.currentNote.noteText = self.noteTextView.text;
         [self.manager saveNote:self.currentNote usingKey:self.key];
     } else {
         ECNote *newNote = [ECNote new];
         newNote.noteText = self.noteTextView.text;
+        self.newNote(newNote);
         [self.manager saveNote:newNote usingKey:self.key];
-        [self.delegate detailsViewController:self saveNote:newNote];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ECNoteViewController.h"
 
-@interface ECNotesTableViewController : UITableViewController <ECNoteDetailsDelegate>
+@interface ECNotesTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString *key;
+@property (strong, nonatomic) NSMutableArray *notes;
 
 @end
